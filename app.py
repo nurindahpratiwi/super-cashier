@@ -1,5 +1,5 @@
-import mysql.connector 
-from mysql.connector import Error
+import mysql.connector
+from mysql.connector import errorcode
 import pandas as pd
 from datetime import date, datetime, timedelta
 import warnings
@@ -35,7 +35,7 @@ class Transaction:
             cursor.execute(add_item,list_item)
             myconn.commit()
             print("\nData belanja Anda berhasil diinput.\n")
-        except:
+        except mysql.connector.Error as err:
             print("\nPenambahan data belanja Anda gagal. Periksa kembali input Anda.\n")
         
         menu()
@@ -47,7 +47,7 @@ class Transaction:
             cursor.execute(upd_item_name,list_item)
             myconn.commit()
             print("\nData belanja Anda berhasil diupdate.\n")
-        except:
+        except mysql.connector.Error as err:
             print("\nPerubahan data belanja Anda gagal. Periksa kembali input Anda.\n")
 
     def update_item_qty(item_name, item_qty_upd):
@@ -77,7 +77,7 @@ class Transaction:
         menu()
 
     def total_price():
-        total_price = pd.read_sql_query("""SELECT SUM(total_harga) grand_total
+        total = pd.read_sql_query("""SELECT SUM(total_harga) grand_total
                                 FROM transaction""", myconn)
 
         menu()
