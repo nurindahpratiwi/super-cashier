@@ -18,20 +18,19 @@ myconn = mysql.connector.connect(host=hostname, user=user,
 cursor = myconn.cursor()
 
 class Transaction:
-
-    def add_item(item_name, item_total, item_price):
+    def add_item(self, item_name, item_price) :
         print("-"*60)
         print("MASUKKAN ITEM BARU")
         print("-"*60)
 
         item_name = input("Nama item : ")
-        item_total = int(input("Jumlah item : "))
+        item_qty = int(input("Jumlah item : "))
         item_price = int(input("Harga per item : "))
         
         try:
-            list_item = {'item_name': item_name,'item_total': item_total,'item_price': item_price}
+            list_item = {'item_name': item_name,'item_qty': item_qty,'item_price': item_price}
             add_item = """ INSERT INTO transaction(nama_item, jumlah_item, harga)
-                        VALUES(%(item_name)s, %(item_total)s, %(item_price)s) """
+                        VALUES(%(item_name)s, %(itqm_qty)s, %(item_price)s) """
             cursor.execute(add_item,list_item)
             myconn.commit()
             print("\nData belanja Anda berhasil diinput.\n")
@@ -40,7 +39,7 @@ class Transaction:
         
         menu()
     
-    def update_item_name(item_name, item_name_upd):
+    def update_item_name(self, item_name, item_name_upd):
         try:
             list_item = {'item_name': item_name, 'item_name_upd': item_name_upd}
             upd_item_name = """UPDATE transaction SET nama_item =%(item_name_upd)s WHERE nama_item =%(item_name)s"""
@@ -63,22 +62,23 @@ class Transaction:
         pass
 
     def check_order():
-        item_list = pd.read_sql_query(""" SELECT nama_item, jumlah_item, harga, 
-                                    concat(jumlah_item*harga) AS total_harga FROM transaction """,myconn)
-        df_groceries = pd.DataFrame(item_list)
-        cursor.execute(item_list)
-        rows=cursor.fetchall()
-        print("-"*60)
-        print("DAFTAR BELANJA ANDA")
-        print("-"*60)
-        for row in rows:
-            print(row)
+        try:
+            item_list = """ SELECT nama_item, jumlah_item, harga, 
+                jumlah_item*harga AS total_harga FROM transaction """
+            cursor.execute(item_list)
+            rows=cursor.fetchall()
+            print("-"*60)
+            print("DAFTAR BELANJA ANDA")
+            print("-"*60)
+            for row in rows:
+                print(row)
+        except mysql.connector.Error as err:
+            print("\nPengecekan order Anda gagal, kemungkikan keranjang belanja Anda kosong atau Anda dapat periksa kembali input Anda .\n")
 
         menu()
 
     def total_price():
-        total = pd.read_sql_query("""SELECT SUM(total_harga) grand_total
-                                FROM transaction""", myconn)
+        total = """SELECT SUM(total_harga) grand_total FROM transaction"""
 
         menu()
 
@@ -90,15 +90,19 @@ def menu():
     print("-"*60)
     print("1. Tambah Isi Keranjang Belanja Anda")
     print("2. Update Keranjang Belanja Anda")
+    print("3. Check Keranjang Belanja Anda")
     print("0. Exit\n")
     
     choice = int(input('Masukkan Nomor Tugas : '))
-    
+    Trx = Transaction()
+
     try:
         if choice == 1:
-            Transaction.add_item()
+            Trx.add_item()
         elif choice == 2:
-            Transaction.update_item_name()
+            Trx.update_item_name()
+        elif choice == 3:
+            Trx.check_order()
         elif choice == 0:
             print("-"*60)
             print("Terima kasih telah mengunjungi Supermarket XYZ.")
