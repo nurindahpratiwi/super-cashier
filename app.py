@@ -18,15 +18,20 @@ myconn = mysql.connector.connect(host=hostname, user=user,
 cursor = myconn.cursor()
 
 class Transaction:
-    def add_item(self, item_name, item_price) :
+    def __init__(self, item_name, item_qty, item_price):
+        self.item_name = item_name
+        self.item_qty = item_qty
+        self.item_price = item_price
+
+    def add_item(self, item_name, item_qty, item_price) :
         print("-"*60)
         print("MASUKKAN ITEM BARU")
         print("-"*60)
 
         item_name = input("Nama item : ")
         item_qty = int(input("Jumlah item : "))
-        item_price = int(input("Harga per item : "))
-        
+        item_price = int(input("Harga per item : "))   
+
         try:
             list_item = {'item_name': item_name,'item_qty': item_qty,'item_price': item_price}
             add_item = """ INSERT INTO transaction(nama_item, jumlah_item, harga)
@@ -38,28 +43,6 @@ class Transaction:
             print("\nPenambahan data belanja Anda gagal. Periksa kembali input Anda.\n")
         
         menu()
-    
-    def update_item_name(self, item_name, item_name_upd):
-        try:
-            list_item = {'item_name': item_name, 'item_name_upd': item_name_upd}
-            upd_item_name = """UPDATE transaction SET nama_item =%(item_name_upd)s WHERE nama_item =%(item_name)s"""
-            cursor.execute(upd_item_name,list_item)
-            myconn.commit()
-            print("\nData belanja Anda berhasil diupdate.\n")
-        except mysql.connector.Error as err:
-            print("\nPerubahan data belanja Anda gagal. Periksa kembali input Anda.\n")
-
-    def update_item_qty(item_name, item_qty_upd):
-        pass
-
-    def update_item_price(item_price, item_price_upd):
-        pass
-
-    def delete_item(item_name):
-        pass
-
-    def reset_transaction():
-        pass
 
     def check_order():
         try:
@@ -77,11 +60,6 @@ class Transaction:
 
         menu()
 
-    def total_price():
-        total = """SELECT SUM(total_harga) grand_total FROM transaction"""
-
-        menu()
-
 def menu():
     """Fungsi untuk menampilkan daftar tugas.
     """
@@ -93,14 +71,12 @@ def menu():
     print("3. Check Keranjang Belanja Anda")
     print("0. Exit\n")
     
-    choice = int(input('Masukkan Nomor Tugas : '))
+    choice = int(input('Masukkan Pilihan Anda : '))
     Trx = Transaction()
 
     try:
         if choice == 1:
-            Trx.add_item()
-        elif choice == 2:
-            Trx.update_item_name()
+            Trx.add_item(item_name, item_qty, item_price)
         elif choice == 3:
             Trx.check_order()
         elif choice == 0:
@@ -108,6 +84,7 @@ def menu():
             print("Terima kasih telah mengunjungi Supermarket XYZ.")
             print("-"*60)
             pass
+
         else:
             print("Input Anda Salah.\n")
             menu()
