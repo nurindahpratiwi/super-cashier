@@ -161,8 +161,8 @@ def update_item_price(self):
     mydb.commit()
 ```
 ## Flowchart
+![flow-chart](https://user-images.githubusercontent.com/22311240/203033408-7d8a75b1-1354-4c43-b979-66efffbfaab1.jpg)
 
-![image](https://drive.google.com/uc?export=view&id=16dkiHf89ChP0Y-Jz6m5uUYbRYoKtU_Rr)
 ## How to Start Program
 - Clone project ini ke dalam direktori lokal Anda.
 - Definisikan variabel-variabel di module **user_db.py** dan simpan.
