@@ -170,39 +170,39 @@ def update_item_price(self):
 - Jalankan module python **main.py** di terminal.
 ## Test Case
 - Penambahan keranjang belanja
-<img src="https://user-images.githubusercontent.com/22311240/203088435-c4cc597a-7516-43b3-98c0-606e57e51631.jpg" width=70% height=70%>
-<img src="https://user-images.githubusercontent.com/22311240/203089285-c6050cbc-96f4-4ae0-b6b8-0fbfb0510bc3.jpg" width=70% height=70%>
+<img src="https://user-images.githubusercontent.com/22311240/203088435-c4cc597a-7516-43b3-98c0-606e57e51631.jpg" width=50% height=50%>
+<img src="https://user-images.githubusercontent.com/22311240/203089285-c6050cbc-96f4-4ae0-b6b8-0fbfb0510bc3.jpg" width=50% height=50%>
 
 - Cek keranjang belanja
-<img src="https://user-images.githubusercontent.com/22311240/203089475-772b1c79-5868-46e6-ad88-dbc11efeb83a.jpg" width=70% height=70%>
+<img src="https://user-images.githubusercontent.com/22311240/203089475-772b1c79-5868-46e6-ad88-dbc11efeb83a.jpg" width=50% height=50%>
 
 - Hapus salah satu item di keranjang belanja
-<img src="https://user-images.githubusercontent.com/22311240/203088804-9e56a0c3-3a1f-42ff-bd9d-80e74c2d3c28.jpg" width=70% height=70%>
+<img src="https://user-images.githubusercontent.com/22311240/203088804-9e56a0c3-3a1f-42ff-bd9d-80e74c2d3c28.jpg" width=50% height=50%>
 
 - Hapus seluruh keranjang belanja
-<img src="https://user-images.githubusercontent.com/22311240/203089613-bbe0c57c-a12d-422c-b4ba-abca92192c06.jpg" width=70% height=70%>
+<img src="https://user-images.githubusercontent.com/22311240/203089613-bbe0c57c-a12d-422c-b4ba-abca92192c06.jpg" width=50% height=50%>
 
 - Cek  keranjang belanja (setelah reset)
-<img src="https://user-images.githubusercontent.com/22311240/203089745-34ee1cf8-5c4e-427f-ae35-516a2bc2cab5.jpg" width=70% height=70%>
+<img src="https://user-images.githubusercontent.com/22311240/203089745-34ee1cf8-5c4e-427f-ae35-516a2bc2cab5.jpg" width=50% height=50%>
 
 - Cek total barang (input barang sesuai test case)
-<img src="https://user-images.githubusercontent.com/22311240/203090166-f1c571bf-ac41-473f-b259-27dfa89f3b83.jpg" width=70% height=70%>
+<img src="https://user-images.githubusercontent.com/22311240/203090166-f1c571bf-ac41-473f-b259-27dfa89f3b83.jpg" width=50% height=50%>
 
 - Cek total diskon
-<img src="https://user-images.githubusercontent.com/22311240/203090198-1761d25c-98da-4078-9074-75b8a7e33438.jpg" width=70% height=70%>
+<img src="https://user-images.githubusercontent.com/22311240/203090198-1761d25c-98da-4078-9074-75b8a7e33438.jpg" width=50% height=50%>
 
 - Ubah salah satu item di keranjang belanja
     - Ubah nama item
-    <img src="https://user-images.githubusercontent.com/22311240/203090219-39def103-52af-40e4-b0d7-c355de6b4817.jpg" width=70% height=70%>
+    <img src="https://user-images.githubusercontent.com/22311240/203090219-39def103-52af-40e4-b0d7-c355de6b4817.jpg" width=50% height=50%>
 
     - Ubah jumlah item
-    <img src="https://user-images.githubusercontent.com/22311240/203090231-a6dabae3-5a48-49b8-beef-d19cfe69ec83.jpg" width=70% height=70%>
+    <img src="https://user-images.githubusercontent.com/22311240/203090231-a6dabae3-5a48-49b8-beef-d19cfe69ec83.jpg" width=50% height=50%>
 
     - Ubah harga per item
-    <img src="https://user-images.githubusercontent.com/22311240/203090246-faa3ef86-4505-482f-99c1-ba59832a5417.jpg" width=70% height=70%>
+    <img src="https://user-images.githubusercontent.com/22311240/203090246-faa3ef86-4505-482f-99c1-ba59832a5417.jpg" width=50% height=50%>
 
 - Cek keranjang belanja (setelah ubah data)
-<img src="https://user-images.githubusercontent.com/22311240/203090260-2578fdbf-3170-4b11-b502-ea4cb86b5fb5.jpg" width=70% height=70%>
+<img src="https://user-images.githubusercontent.com/22311240/203090260-2578fdbf-3170-4b11-b502-ea4cb86b5fb5.jpg" width=50% height=50%>
 
 
 
