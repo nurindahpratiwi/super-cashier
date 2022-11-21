@@ -160,6 +160,45 @@ def update_item_price(self):
     #send hasil eksekusi ke dalam database
     mydb.commit()
 ```
+
+- _Function_ untuk **menampilkan total harga barang** barang belanja
+```python
+def total_price(self):
+    try:
+        # query untuk melakukan penjumlahan jumlah item dikali dengan harga
+        price_query = """SELECT SUM(jumlah_item*harga) AS total_harga FROM transaction"""
+
+        #eksekusi query penjumlahan dengan perintah execute
+        cursor.execute(price_query)
+
+        #variabel untuk menyimpan seluruh data yang diambil dari query
+        result = cursor.fetchall()[0][0]
+        result = float(result)
+
+        #condition ini untuk mengecek apakah total belanja eligible untuk diberikan diskon atau tidak
+        if result > 200000:
+            print ("\nAnda mendapatkan diskon 5%")
+            result_diskon = result*0.95
+            print(f"Total belanja Anda adalah: {result}")
+            print(f"Total belanja Anda setelah diskon adalah: {result_diskon}")
+        elif result > 300000:
+            print ("\nAnda mendapatkan diskon 8%")
+            result_diskon = result*0.92
+            print(f"Total belanja Anda adalah: {result}")
+            print(f"Total belanja Anda setelah diskon adalah: {result_diskon}")
+        elif result > 500000:
+            print ("\nAnda mendapatkan diskon 10%")
+            result_diskon = result*0.90
+            print(f"Total belanja Anda adalah: {result}")
+            print(f"Total belanja Anda setelah diskon adalah: {result_diskon}")
+        else:
+            print(f"Total belanja Anda adalah: {result}")
+            print ("\nMaaf Anda belum mendapatkan diskon. Yuk belanja lagi!")
+
+```
+
+
+
 ## Flowchart
 <img src="https://user-images.githubusercontent.com/22311240/203033408-7d8a75b1-1354-4c43-b979-66efffbfaab1.jpg" width=70% height=70%>
 
