@@ -267,9 +267,9 @@ class Transaction:
             result = float(result)
 
             #condition ini untuk mengecek apakah total belanja eligible untuk diberikan diskon atau tidak
-            if result > 200000:
-                print ("\nAnda mendapatkan diskon 5%")
-                result_diskon = result*0.95
+            if result >= 500000:
+                print ("\nAnda mendapatkan diskon 10%")
+                result_diskon = result*0.90
                 print(f"Total belanja Anda adalah: {result}")
                 print(f"Total belanja Anda setelah diskon adalah: {result_diskon}")
             elif result > 300000:
@@ -277,9 +277,9 @@ class Transaction:
                 result_diskon = result*0.92
                 print(f"Total belanja Anda adalah: {result}")
                 print(f"Total belanja Anda setelah diskon adalah: {result_diskon}")
-            elif result > 500000:
-                print ("\nAnda mendapatkan diskon 10%")
-                result_diskon = result*0.90
+            elif result >= 200000:
+                print ("\nAnda mendapatkan diskon 5%")
+                result_diskon = result*0.95
                 print(f"Total belanja Anda adalah: {result}")
                 print(f"Total belanja Anda setelah diskon adalah: {result_diskon}")
             else:

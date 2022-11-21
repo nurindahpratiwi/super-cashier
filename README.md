@@ -100,19 +100,6 @@ def check_order(self):
     rows=cursor.fetchall()
 ```
 
-- _Function_ untuk **mengecek total bayar dan diskon** barang belanja
-```python
-def add_item(self):
-    #query untuk menghitung total bayar dari harga item
-    price_query = """SELECT SUM(jumlah_item*harga) AS total_harga FROM transaction"""
-    
-    #eksekusi query hitung dengan perintah execute
-    cursor.execute(price_query)
-
-    #hasil query disimpan dalam variabel result
-    result = cursor.fetchall()[0][0]
-```
-
 - _Function_ untuk **mengubah nama item** barang belanja
 ```python
 def update_item_name(self):
@@ -161,7 +148,7 @@ def update_item_price(self):
     mydb.commit()
 ```
 
-- _Function_ untuk **menampilkan total harga barang** barang belanja
+- _Function_ untuk **mengecek total bayar dan diskon** barang belanja
 ```python
 def total_price(self):
     try:
