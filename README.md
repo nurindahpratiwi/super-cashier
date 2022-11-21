@@ -161,7 +161,7 @@ def update_item_price(self):
     mydb.commit()
 ```
 ## Flowchart
-![flow-chart](https://user-images.githubusercontent.com/22311240/203033408-7d8a75b1-1354-4c43-b979-66efffbfaab1.jpg)
+![flow-chart](https://user-images.githubusercontent.com/22311240/203033408-7d8a75b1-1354-4c43-b979-66efffbfaab1.jpg | width=800)
 
 ## How to Start Program
 - Clone project ini ke dalam direktori lokal Anda.
