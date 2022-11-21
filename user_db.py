@@ -1,4 +1,4 @@
 hostname = "localhost"
 user = "wiwaaw"
-password = "Wi*5810w"
+password = ""
 db = "cashier"
