@@ -1,16 +1,20 @@
-"""
+"""Modul ini berisi menu yang terdapat di aplikasi super cashier
+pada bagian awal modul didefinisikan koneksi database yang terhubung
+untuk menyimpan data dari aplikasi super cashier
 """
 
-#Import library yang akan digunakan
+# Import library yang akan digunakan
 import mysql.connector as mysql
 import user_db
 from sys import exit
 
+# Definisikan koneksi database yang digunakan dari modul user_db
 hostname = user_db.hostname 
 user = user_db.user 
 password = user_db.password 
 db = user_db.db  
 
+# Koneksikan database dan beri nama variabel menjadi mydb
 mydb = mysql.connect(host=hostname, user=user, password=password, database=db)
 
 # Membuat object cursor yang terkoneksi dengan database db
@@ -18,6 +22,8 @@ cursor = mydb.cursor()
 
 class Transaction:
     def add_item(self):
+        """ Fungsi untuk menambahkan item belanja ke dalam keranjang belanja
+        """
         print("-"*50)
         print("MASUKKAN ITEM BARU")
 
@@ -26,9 +32,16 @@ class Transaction:
         item_price = int(input("Harga per item : "))
 
         try:
+            #list variabel yang ingin ditambahkan
             list_item = (item_name, item_qty, item_price)
+
+            #query untuk menambahkan nama, jumlah dan harga item ke dalam database
             add_query = """INSERT INTO transaction(nama_item, jumlah_item, harga) VALUES(%s, %s, %s)"""
+            
+            #eksekusi query dengan perintah execute
             cursor.execute(add_query, list_item)
+            
+            #send hasil eksekusi ke dalam database
             mydb.commit()
             print("\nData belanja Anda berhasil diinput.\n")
         except mysql.connector.Error as err:
@@ -37,15 +50,24 @@ class Transaction:
         return menu()
     
     def delete_item(self):
+        """ Fungsi untuk menghapus salah satu item berdasarkan nama item yang diinginkan
+        """
         print("-"*50)
         print("MASUKKAN ITEM YANG INGIN ANDA HAPUS")
 
         item_name = input("\nNama item : ")
 
         try:
+            #list input yang dibutuhkan untuk mengubah nama
             list_item = (item_name,)
+
+            #query untuk menghapus sebuah item berdasarkan nama yang diinput
             delete_query = """DELETE FROM transaction WHERE nama_item = %s"""
+
+            #eksekusi query delete item dengan perintah execute
             cursor.execute(delete_query,list_item)
+
+            #send hasil eksekusi ke dalam database
             mydb.commit()
             print("\nData belanja Anda berhasil dihapus.\n")
         except mysql.connector.Error as err:
@@ -54,6 +76,8 @@ class Transaction:
         return menu()
 
     def update_item_name(self):
+        """ Fungsi untuk memperbaharui nama item, dibutuhkan nama item lama dan nama item baru 
+        """
         print("-"*50)
         print("MASUKKAN NAMA ITEM YANG INGIN ANDA UBAH")
 
@@ -61,9 +85,16 @@ class Transaction:
         item_name_new = input("Nama item (update): ")
 
         try:
+            #list variabel nama yang ingin dieksekusi
             list_item = [item_name_new, item_name]
+
+            #query untuk mengubah nama sesuai dengan input user
             update_query = """UPDATE transaction SET nama_item=%s WHERE nama_item=%s"""
+            
+            #eksekusi query ubah nama dengan perintah execute
             cursor.execute(update_query, list_item)
+
+            #send hasil eksekusi ke dalam database
             mydb.commit()
             print("\nData belanja Anda berhasil diubah.\n")
         except mysql.connector.Error as err:
@@ -72,6 +103,8 @@ class Transaction:
         return menu()
 
     def update_item_qty(self):
+        """ Fungsi untuk memperbaharui jumlah item, dibutuhkan nama item yang telah diinput
+        """
         print("-"*50)
         print("MASUKKAN JUMLAH ITEM YANG INGIN ANDA UBAH")
 
@@ -79,9 +112,16 @@ class Transaction:
         item_qty_new = int(input("Jumlah item (update): "))
 
         try:
+            #list variabel jumlah yang ingin dieksekusi
             list_item = [item_qty_new, item_name]
+
+            #query untuk mengubah jumlah item berdasarkan nama yang diinput
             update_query = """UPDATE transaction SET jumlah_item=%s WHERE nama_item=%s"""
+
+            #eksekusi query ubah jumlah item dengan perintah execute
             cursor.execute(update_query, list_item)
+
+            #send hasil eksekusi ke dalam database
             mydb.commit()
             print("\nData belanja Anda berhasil diubah.\n")
         except mysql.connector.Error as err:
@@ -91,6 +131,8 @@ class Transaction:
         
 
     def update_item_price(self):
+        """ Fungsi untuk memperbaharui harga per item, dibutuhkan nama item yang telah diinput
+        """
         print("-"*50)
         print("MASUKKAN HARGA ITEM YANG INGIN ANDA UBAH")
 
@@ -98,9 +140,16 @@ class Transaction:
         item_price_new = int(input("Harga per item (update): "))
 
         try:
+            #list variabel harga yang ingin dieksekusi
             list_item = [item_price_new, item_name]
+
+            #eksekusi query ubah harga per item dengan perintah execute
             update_query = """UPDATE transaction SET harga=%s WHERE nama_item=%s"""
+
+            #eksekusi query ubah harga item dengan perintah execute
             cursor.execute(update_query, list_item)
+
+            #send hasil eksekusi ke dalam database
             mydb.commit()
             print("\nData belanja Anda berhasil diubah.\n")
         except mysql.connector.Error as err:
@@ -110,6 +159,9 @@ class Transaction:
 
 
     def update_item(self):
+        """ Fungsi untuk memanggil fungsi update nama, jumlah, dan harga item. User diberikan
+        ketiga pilihan tersebut ketika fungsi ini dipanggil
+        """
         print("-"*50)
         print("TRANSAKSI APA YANG INGIN ANDA UPDATE?")
         print("1. Ubah Nama Item")
@@ -132,6 +184,9 @@ class Transaction:
         return menu()
 
     def reset_transaction(self):
+        """ Fungsi untuk menghapus seluruh keranjang belanja. Ketika fungsi ini dijalankan,
+        user diminta untuk validasi proses ini dengan input angka validasi.
+        """
         print("-"*50)
         print("APAKAH ANDA YAKIN MENGHAPUS SEMUA TRANSAKSI?")
 
@@ -139,8 +194,13 @@ class Transaction:
 
         try:
             if ensure_key == 1:
+                #query untuk langsung menghapus seluruh row dari tabel transaction
                 delete_query = """ DELETE from transaction """
+
+                #eksekusi query delete all dengan perintah execute
                 cursor.execute(delete_query)
+
+                #send hasil eksekusi ke dalam database
                 mydb.commit()
                 print("\nData berhasil di hapus")
             else:
@@ -153,18 +213,24 @@ class Transaction:
         return menu()
 
     def check_order(self):
+        """ Fungsi untuk melakukan cek keranjang belanja dan menampilkan total harga masing-masing item
+        """
         try:
+            #query untuk melakukan pengecekan barang
             check_query = """ SELECT nama_item, jumlah_item, harga, 
                 jumlah_item*harga AS total_harga FROM transaction """
 
+            #eksekusi query cek dengan perintah execute
             cursor.execute(check_query)
+
+            #variabel untuk menyimpan seluruh data yang diambil dari query
             rows=cursor.fetchall()
             print("-"*50)
             print("DAFTAR BELANJA ANDA")
             print("-"*50)
 
             # DATA PADA SQL ADALAH TUPLES
-            template = "{0:15}|{1:10}|{2:11}|{3:7}" # lebar kolom = 15, 10, 11, 7
+            template = "{0:15}|{1:10}|{2:11}|{3:7}" # setting lebar kolom = 15, 10, 11, 7
             print (template.format("NAMA ITEM", "JUMLAH", "HARGA", "TOTAL HARGA")) # header
             print("-"*50)
             for row in rows: 
@@ -187,11 +253,20 @@ class Transaction:
         return menu()
 
     def total_price(self):
+        """ Fungsi untuk melakukan perhitungan grand total dari keranjang belanja
+        """
         try:
+            # query untuk melakukan penjumlahan jumlah item dikali dengan harga
             price_query = """SELECT SUM(jumlah_item*harga) AS total_harga FROM transaction"""
+
+            #eksekusi query penjumlahan dengan perintah execute
             cursor.execute(price_query)
+
+            #variabel untuk menyimpan seluruh data yang diambil dari query
             result = cursor.fetchall()[0][0]
             result = float(result)
+
+            #condition ini untuk mengecek apakah total belanja eligible untuk diberikan diskon atau tidak
             if result > 200000:
                 print ("\nAnda mendapatkan diskon 5%")
                 result_diskon = result*0.95
@@ -220,7 +295,7 @@ class Transaction:
 
 
 def menu():
-    """Fungsi untuk menampilkan daftar tugas.
+    """Fungsi untuk menampilkan daftar menu.
     """
     print("-"*50)
     print("SELAMAT DATANG DI SELF SERVICE SUPERMARKET WIWAAW")
