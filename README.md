@@ -215,7 +215,7 @@ def total_price(self):
 <img src="https://user-images.githubusercontent.com/22311240/203090166-f1c571bf-ac41-473f-b259-27dfa89f3b83.jpg" width=50% height=50%>
 
 - Cek total diskon
-<img src="https://user-images.githubusercontent.com/22311240/203090198-1761d25c-98da-4078-9074-75b8a7e33438.jpg" width=50% height=50%>
+<img src="https://user-images.githubusercontent.com/22311240/203177963-42f15130-50d0-43d3-9afd-e76fea0d0976.jpg" width=50% height=50%>
 
 - Ubah salah satu item di keranjang belanja
     - Ubah nama item
